@@ -1,0 +1,18 @@
+ECHO is on.
+# Folder build
+/target/
+/build/
+
+# File log
+*.log
+
+# Pengaturan IDE (VS Code, IntelliJ, Eclipse)
+.idea/
+*.iml
+.classpath
+.project
+.settings/
+
+# File kredensial sensitif
+/src/main/resources/application.properties
+.env
