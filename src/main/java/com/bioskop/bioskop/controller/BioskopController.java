@@ -1,15 +1,22 @@
 package com.bioskop.bioskop.controller;
 
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.bioskop.bioskop.model.Bioskop;
 import com.bioskop.bioskop.model.Film;
 import com.bioskop.bioskop.model.Jadwal;
 import com.bioskop.bioskop.repository.BioskopRepository;
 import com.bioskop.bioskop.repository.FilmRepository;
 import com.bioskop.bioskop.repository.JadwalRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/bioskop")
@@ -38,11 +45,11 @@ public class BioskopController {
         if (bioskopOpt.isPresent() && filmOpt.isPresent()) {
             Bioskop bioskop = bioskopOpt.get();
             Film film = filmOpt.get();
-            // Tambah jadwal ke film
+
             film.tambahJadwal(jadwal);
             jadwalRepository.save(jadwal);
-            // Tambahkan film ke bioskop (buat relasi sesuai kebutuhan)
-            bioskop.tambahFilm(film, jadwal.getWaktu());
+
+            bioskop.tambahFilm(film, jadwal.getWaktu()); 
             bioskopRepository.save(bioskop);
             filmRepository.save(film);
             return "Film dan jadwal berhasil ditambahkan ke bioskop";
@@ -54,5 +61,10 @@ public class BioskopController {
     @GetMapping("/{idBioskop}")
     public Optional<Bioskop> getBioskop(@PathVariable String idBioskop) {
         return bioskopRepository.findById(idBioskop);
+    }
+
+    @GetMapping
+    public List<Bioskop> getAllBioskop() {
+        return bioskopRepository.findAll();
     }
 }

@@ -1,23 +1,42 @@
 package com.bioskop.bioskop.model;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 
 @Entity
-public class Transaksi implements QRGenerator{
-    @Id
-    @GeneratedValue
-    private String idTransaksi;
-    private Date tanggalTransaksi;
-    private Integer totalHarga;
+public class Transaksi implements QRGenerator {
 
-    public Transaksi(String idTransaksi, Date tanggalTransaksi, Integer totalHarga) {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String idTransaksi;
+    private LocalDateTime tanggalTransaksi;
+    private Integer totalHarga;
+    private String kodeTiket;
+
+    @ManyToOne
+    private Film film;
+
+    @ManyToOne
+    private Bioskop bioskop;
+
+    // Default constructor (dibutuhkan JPA)
+    public Transaksi() {}
+
+    public Transaksi(String idTransaksi, LocalDateTime tanggalTransaksi, Integer totalHarga) {
         this.idTransaksi = idTransaksi;
         this.tanggalTransaksi = tanggalTransaksi;
         this.totalHarga = totalHarga;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public String getIdTransaksi() {
@@ -28,11 +47,11 @@ public class Transaksi implements QRGenerator{
         this.idTransaksi = idTransaksi;
     }
 
-    public Date getTanggalTransaksi() {
+    public LocalDateTime getTanggalTransaksi() {
         return tanggalTransaksi;
     }
 
-    public void setTanggalTransaksi(Date tanggalTransaksi) {
+    public void setTanggalTransaksi(LocalDateTime tanggalTransaksi) {
         this.tanggalTransaksi = tanggalTransaksi;
     }
 
@@ -44,12 +63,28 @@ public class Transaksi implements QRGenerator{
         this.totalHarga = totalHarga;
     }
 
-    public Integer hitungTotal() {
-        return totalHarga;
+    public String getKodeTiket() {
+        return kodeTiket;
     }
 
-    public void generateTiket(){
+    public void setKodeTiket(String kodeTiket) {
+        this.kodeTiket = kodeTiket;
+    }
 
+    public Film getFilm() {
+        return film;
+    }
+
+    public void setFilm(Film film) {
+        this.film = film;
+    }
+
+    public Bioskop getBioskop() {
+        return bioskop;
+    }
+
+    public void setBioskop(Bioskop bioskop) {
+        this.bioskop = bioskop;
     }
 
     @Override

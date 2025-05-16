@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.bioskop.bioskop.model.Bioskop;
 
 @Repository
-public interface BioskopRepository extends JpaRepository<Bioskop, String>{
+public interface BioskopRepository extends JpaRepository<Bioskop, String> {
 
 }
