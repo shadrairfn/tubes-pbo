@@ -31,7 +31,7 @@ public class BioskopController {
     @Autowired
     private JadwalRepository jadwalRepository;
 
-    @PostMapping("/")
+    @PostMapping
     public Bioskop createBioskop(@RequestBody Bioskop bioskop) {
         return bioskopRepository.save(bioskop);
     }
