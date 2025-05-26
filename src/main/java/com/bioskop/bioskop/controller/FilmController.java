@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -37,5 +38,15 @@ public class FilmController {
     @GetMapping("/{idFilm}")
     public Optional<Film> getFilmById(@PathVariable String idFilm) {
         return filmRepository.findById(idFilm);
+    }
+
+    @DeleteMapping("/{idFilm}")
+    public String deleteFilm(@PathVariable String idFilm) {
+        if (filmRepository.existsById(idFilm)) {
+            filmRepository.deleteById(idFilm);
+            return "Film dengan ID " + idFilm + " berhasil dihapus.";
+        } else {
+            return "Film dengan ID " + idFilm + " tidak ditemukan.";
+        }
     }
 }
