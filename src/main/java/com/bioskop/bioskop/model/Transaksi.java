@@ -4,13 +4,17 @@ import java.time.LocalDateTime;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Transaksi implements QRGenerator {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)  // Tambahkan ini untuk auto increment id
     private Long id;
+
     private String idTransaksi;
     private LocalDateTime tanggalTransaksi;
     private Integer totalHarga;
