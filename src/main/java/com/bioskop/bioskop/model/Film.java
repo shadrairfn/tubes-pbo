@@ -9,8 +9,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+
 @Entity
 public class Film {
 
@@ -21,13 +23,21 @@ public class Film {
     private Integer durasi;
     private String deskripsi;
     private Date tanggalRilis;
+
+    private String dimensi;
+    private Integer batasUmur;
+
+    @Lob
+    private byte[] poster;
+
     @OneToMany(mappedBy = "film", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Jadwal> jadwalList;
+    private List<Jadwal> jadwalList = new ArrayList<>();
 
     @ManyToOne
     @JoinColumn(name = "bioskop_id")
     private Bioskop bioskop;
 
+    // Constructor kosong
     public Film() {
 
     }
@@ -40,6 +50,23 @@ public class Film {
         this.tanggalRilis = tanggalRilis;
         this.jadwalList = new ArrayList<>();
     }
+
+    // Getter dan Setter
+
+    public String getDimensi() { return dimensi; }
+    public void setDimensi(String dimensi) { this.dimensi = dimensi; }
+
+    public Integer getBatasUmur() { return batasUmur; }
+    public void setBatasUmur(Integer batasUmur) { this.batasUmur = batasUmur; }
+
+    public byte[] getPoster() { return poster; }
+    public void setPoster(byte[] poster) { this.poster = poster; }
+
+    public List<Jadwal> getJadwalList() { return jadwalList; }
+    public void setJadwalList(List<Jadwal> jadwalList) { this.jadwalList = jadwalList; }
+
+    public Bioskop getBioskop() { return bioskop; }
+    public void setBioskop(Bioskop bioskop) { this.bioskop = bioskop; }
 
     public String getIdFilm() {
         return idFilm;
