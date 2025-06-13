@@ -10,6 +10,7 @@ public class TiketResponseDTO {
     private String kodeTiket;
     private String namaBioskop;
     private String namaFilm;
+    private String alamatBioskop;
 
     public TiketResponseDTO(
         List<Integer> daftarKursi,
@@ -17,7 +18,8 @@ public class TiketResponseDTO {
         String jamTayang,
         String kodeTiket,
         String namaBioskop,
-        String namaFilm
+        String namaFilm,
+        String alamatBioskop
     ) {
         this.daftarKursi = daftarKursi;
         this.idTransaksi = idTransaksi;
@@ -25,6 +27,7 @@ public class TiketResponseDTO {
         this.kodeTiket = kodeTiket;
         this.namaBioskop = namaBioskop;
         this.namaFilm = namaFilm;
+        this.alamatBioskop = alamatBioskop;
     }
 
     // Getter & Setter
@@ -74,5 +77,13 @@ public class TiketResponseDTO {
 
     public void setNamaFilm(String namaFilm) {
         this.namaFilm = namaFilm;
+    }
+
+    public String getAlamatBioskop() {
+        return alamatBioskop;
+    }
+
+    public void setAlamatBioskop(String alamatBioskop) {
+        this.alamatBioskop = alamatBioskop;
     }
 }

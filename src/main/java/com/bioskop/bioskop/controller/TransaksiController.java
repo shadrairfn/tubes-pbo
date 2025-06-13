@@ -92,7 +92,8 @@ public class TransaksiController {
             formattedJam,
             transaksi.getKodeTiket(),
             bioskop.getNamaBioskop(),
-            film.getJudul()
+            film.getJudul(),
+            bioskop.getLokasi()
         );
 
         return ResponseEntity.ok(response);
@@ -117,7 +118,8 @@ public class TransaksiController {
             formattedJam,  // tipe Date, langsung dipakai karena DTO pakai Date juga
             transaksi.getKodeTiket(),
             bioskop.getNamaBioskop(),
-            film.getJudul()
+            film.getJudul(),
+            bioskop.getLokasi()
         );
 
         return ResponseEntity.ok(response);
@@ -135,7 +137,8 @@ public class TransaksiController {
             formatter.format(transaksi.getJadwal().getWaktu()),
             transaksi.getKodeTiket(),
             transaksi.getBioskop().getNamaBioskop(),
-            transaksi.getFilm().getJudul()
+            transaksi.getFilm().getJudul(),
+            transaksi.getBioskop().getLokasi()
         )).toList();
     }
 
