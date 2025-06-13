@@ -3,16 +3,16 @@ package com.bioskop.bioskop.model;
 import java.time.LocalDateTime;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Transaksi implements QRGenerator {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)  // Tambahkan ini untuk auto increment id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String idTransaksi;
@@ -26,6 +26,12 @@ public class Transaksi implements QRGenerator {
     @ManyToOne
     private Bioskop bioskop;
 
+    @ManyToOne
+    private Jadwal jadwal;
+
+    @ManyToOne
+    private Kursi kursi;
+
     // Default constructor (dibutuhkan JPA)
     public Transaksi() {}
 
@@ -33,10 +39,6 @@ public class Transaksi implements QRGenerator {
         this.idTransaksi = idTransaksi;
         this.tanggalTransaksi = tanggalTransaksi;
         this.totalHarga = totalHarga;
-    }
-
-    public Long getId() {
-        return id;
     }
 
     public String getIdTransaksi() {
@@ -90,5 +92,29 @@ public class Transaksi implements QRGenerator {
     @Override
     public String generateQR() {
         return "QR CODE";
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Jadwal getJadwal() {
+        return jadwal;
+    }
+
+    public void setJadwal(Jadwal jadwal) {
+        this.jadwal = jadwal;
+    }
+
+    public Kursi getKursi() {
+        return kursi;
+    }
+
+    public void setKursi(Kursi kursi) {
+        this.kursi = kursi;
     }
 }
