@@ -77,13 +77,12 @@ public class BioskopController {
             // Buat kursi berdasarkan totalKursi
             for (int i = 1; i <= jadwal.getTotalKursi(); i++) {
                 Kursi kursi = new Kursi();
-                kursi.setNomorKursi("No"+ i); // Bisa disesuaikan formatnya
+                kursi.setIdKursi(i);
+                kursi.setNomorKursi(i); // Bisa disesuaikan formatnya
                 kursi.setTersedia(true);
                 kursi.setJadwal(jadwal);
                 kursiRepository.save(kursi);
             }
-
-            
         }
 
         filmRepository.save(film); // Akan cascading save ke Jadwal juga

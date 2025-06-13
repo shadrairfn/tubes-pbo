@@ -24,7 +24,7 @@ public class KursiController {
     }
 
     @GetMapping("/{idKursi}/nomor")
-    public String getNomorKursiById(@PathVariable String idKursi) {
+    public Integer getNomorKursiById(@PathVariable Integer idKursi) {
         return kursiRepository.findById(idKursi)
                 .map(Kursi::getNomorKursi)
                 .orElseThrow(() -> new RuntimeException("Kursi dengan ID " + idKursi + " tidak ditemukan"));

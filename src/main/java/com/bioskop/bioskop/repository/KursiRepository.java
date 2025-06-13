@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 
 import com.bioskop.bioskop.model.Kursi;
 @Repository
-public interface KursiRepository extends JpaRepository<Kursi, String> {
+public interface KursiRepository extends JpaRepository<Kursi, Integer> {
     List<Kursi> findByJadwal_IdJadwal(String idJadwal);
 }

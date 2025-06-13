@@ -1,15 +1,17 @@
 package com.bioskop.bioskop.model;
 
-import jakarta.persistence.*;
-import java.util.UUID;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Kursi {
 
     @Id
-    private String idKursi = UUID.randomUUID().toString();
+    private Integer idKursi;
 
-    private String nomorKursi;
+    private Integer nomorKursi;
     private boolean tersedia;
 
     @ManyToOne
@@ -17,19 +19,19 @@ public class Kursi {
     private Jadwal jadwal;
 
     // Getter & Setter
-    public String getIdKursi() {
+    public Integer getIdKursi() {
         return idKursi;
     }
 
-    public void setIdKursi(String idKursi) {
+    public void setIdKursi(Integer idKursi) {
         this.idKursi = idKursi;
     }
 
-    public String getNomorKursi() {
+    public Integer getNomorKursi() {
         return nomorKursi;
     }
 
-    public void setNomorKursi(String nomorKursi) {
+    public void setNomorKursi(Integer nomorKursi) {
         this.nomorKursi = nomorKursi;
     }
 

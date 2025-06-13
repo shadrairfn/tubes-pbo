@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -29,6 +30,7 @@ public class Jadwal {
 
     @ManyToOne
     @JoinColumn(name = "bioskop_id")
+    @JsonIgnore
     private Bioskop bioskop;
 
     private Date waktu;
