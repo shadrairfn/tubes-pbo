@@ -1,5 +1,9 @@
 package com.bioskop.bioskop.controller;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URLConnection;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -11,6 +15,7 @@ import com.bioskop.bioskop.repository.FilmRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.ContentDisposition;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -43,16 +48,31 @@ public class FilmController {
 
     @GetMapping("/{idFilm}/poster")
     public ResponseEntity<byte[]> getFilmPoster(@PathVariable String idFilm) {
-        Optional<Film> film = filmRepository.findById(idFilm);
-        if (film.isEmpty() || film.get().getPoster() == null) {
+        Optional<Film> filmOpt = filmRepository.findById(idFilm);
+        if (filmOpt.isEmpty() || filmOpt.get().getPoster() == null) {
             return ResponseEntity.notFound().build();
         }
 
-        byte[] image = film.get().getPoster();
+        byte[] image = filmOpt.get().getPoster();
+        String contentType = "application/octet-stream"; // default kalau tidak ketebak
+
+        try (InputStream is = new ByteArrayInputStream(image)) {
+            String guessed = URLConnection.guessContentTypeFromStream(is);
+            if (guessed != null) {
+                contentType = guessed;
+            }
+        } catch (IOException e) {
+            e.printStackTrace(); // log error
+        }
+
         HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.IMAGE_JPEG); // Atur sesuai jenis poster
+        headers.setContentType(MediaType.parseMediaType(contentType));
+        headers.setContentDisposition(ContentDisposition.inline().filename("poster").build());
+
         return new ResponseEntity<>(image, headers, HttpStatus.OK);
     }
+
+
 
     @DeleteMapping("/{idFilm}")
     public ResponseEntity<?> deleteFilm(@PathVariable String idFilm) {
