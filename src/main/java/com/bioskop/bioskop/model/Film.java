@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -30,8 +32,7 @@ public class Film {
     @Lob
     private byte[] poster;
 
-    @OneToMany(mappedBy = "film", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Jadwal> jadwalList = new ArrayList<>();
+   
 
     @ManyToOne
     @JoinColumn(name = "bioskop_id")
@@ -50,7 +51,7 @@ public class Film {
         this.tanggalRilis = tanggalRilis;
         this.dimensi = dimensi;
         this.batasUmur = batasUmur;
-        this.jadwalList = new ArrayList<>();
+        
     }
 
     // Getter dan Setter
@@ -64,8 +65,7 @@ public class Film {
     public byte[] getPoster() { return poster; }
     public void setPoster(byte[] poster) { this.poster = poster; }
 
-    public List<Jadwal> getJadwalList() { return jadwalList; }
-    public void setJadwalList(List<Jadwal> jadwalList) { this.jadwalList = jadwalList; }
+   
 
     public Bioskop getBioskop() { return bioskop; }
     public void setBioskop(Bioskop bioskop) { this.bioskop = bioskop; }
@@ -130,9 +130,7 @@ public class Film {
 
     }
 
-    public void tambahJadwal(Jadwal jadwal){
-        jadwalList.add(jadwal);
-    }
+   
 
     
 }

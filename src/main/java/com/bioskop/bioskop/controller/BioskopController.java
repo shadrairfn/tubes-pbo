@@ -83,8 +83,7 @@ public class BioskopController {
                 kursiRepository.save(kursi);
             }
 
-            // Tambahkan jadwal ke film
-            film.getJadwalList().add(jadwal);
+            
         }
 
         filmRepository.save(film); // Akan cascading save ke Jadwal juga
