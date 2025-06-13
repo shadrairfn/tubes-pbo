@@ -22,4 +22,12 @@ public class KursiController {
     public List<Kursi> getKursiByJadwal(@PathVariable String idJadwal) {
         return kursiRepository.findByJadwal_IdJadwal(idJadwal);
     }
+
+    @GetMapping("/{idKursi}/nomor")
+    public String getNomorKursiById(@PathVariable String idKursi) {
+        return kursiRepository.findById(idKursi)
+                .map(Kursi::getNomorKursi)
+                .orElseThrow(() -> new RuntimeException("Kursi dengan ID " + idKursi + " tidak ditemukan"));
+    }
+
 }
