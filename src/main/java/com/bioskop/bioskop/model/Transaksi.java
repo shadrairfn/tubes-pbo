@@ -1,6 +1,7 @@
 package com.bioskop.bioskop.model;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -8,6 +9,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 
 @Entity
@@ -32,8 +36,13 @@ public class Transaksi implements QRGenerator {
     @ManyToOne
     private Jadwal jadwal;
 
-    @ManyToOne
-    private Kursi kursi;
+    @ManyToMany
+    @JoinTable(
+        name = "transaksi_kursi",
+        joinColumns = @JoinColumn(name = "transaksi_id"),
+        inverseJoinColumns = @JoinColumn(name = "kursi_id")
+    )
+    private List<Kursi> kursi;
 
     // Default constructor (dibutuhkan JPA)
     public Transaksi() {}
@@ -113,11 +122,11 @@ public class Transaksi implements QRGenerator {
         this.jadwal = jadwal;
     }
 
-    public Kursi getKursi() {
+    public List<Kursi> getKursi() {
         return kursi;
     }
 
-    public void setKursi(Kursi kursi) {
+    public void setKursi(List<Kursi> kursi) {
         this.kursi = kursi;
     }
 }

@@ -8,11 +8,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
-import com.bioskop.bioskop.model.Bioskop;
-import com.bioskop.bioskop.model.Film;
-import com.bioskop.bioskop.repository.BioskopRepository;
-import com.bioskop.bioskop.repository.FilmRepository;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ContentDisposition;
@@ -20,8 +15,20 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.bioskop.bioskop.model.Bioskop;
+import com.bioskop.bioskop.model.Film;
+import com.bioskop.bioskop.repository.BioskopRepository;
+import com.bioskop.bioskop.repository.FilmRepository;
 
 @RestController
 @RequestMapping("/film")
@@ -39,11 +46,11 @@ public class FilmController {
         return filmRepository.findAll();
     }
 
-    @GetMapping("/{idFilm}")
-    public ResponseEntity<Film> getFilmById(@PathVariable String idFilm) {
-        Optional<Film> film = filmRepository.findById(idFilm);
-        return film.map(ResponseEntity::ok)
-                   .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+    @GetMapping("/{id}")
+    public ResponseEntity<Film> getFilmById(@PathVariable String id) {
+        return filmRepository.findById(id)
+            .map(film -> ResponseEntity.ok().body(film))
+            .orElse(ResponseEntity.notFound().build());
     }
 
     @GetMapping("/{idFilm}/poster")

@@ -2,8 +2,6 @@ package com.bioskop.bioskop.model;
 
 import java.util.Date;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
@@ -31,7 +29,6 @@ public class Film {
 
     @ManyToOne
     @JoinColumn(name = "bioskop_id")
-    @JsonIgnore
     private Bioskop bioskop;
     // Constructor kosong
     public Film() {
@@ -59,8 +56,6 @@ public class Film {
 
     public byte[] getPoster() { return poster; }
     public void setPoster(byte[] poster) { this.poster = poster; }
-
-   
 
     public Bioskop getBioskop() { return bioskop; }
     public void setBioskop(Bioskop bioskop) { this.bioskop = bioskop; }
