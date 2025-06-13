@@ -41,13 +41,15 @@ public class Film {
     public Film() {
 
     }
-    public Film(String deskripsi, Integer durasi, String genre, String idFilm, String judul, Date tanggalRilis) {
+    public Film(String deskripsi, Integer durasi, String genre, String idFilm, String judul, Date tanggalRilis, String dimensi, Integer batasUmur) {
         this.deskripsi = deskripsi;
         this.durasi = durasi;
         this.genre = genre;
         this.idFilm = idFilm;
         this.judul = judul;
         this.tanggalRilis = tanggalRilis;
+        this.dimensi = dimensi;
+        this.batasUmur = batasUmur;
         this.jadwalList = new ArrayList<>();
     }
 
@@ -131,4 +133,6 @@ public class Film {
     public void tambahJadwal(Jadwal jadwal){
         jadwalList.add(jadwal);
     }
+
+    
 }

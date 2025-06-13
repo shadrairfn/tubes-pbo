@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.bioskop.bioskop.dto.JadwalSummaryDTO;
 import com.bioskop.bioskop.model.Jadwal;
 import com.bioskop.bioskop.model.Kursi;
 import com.bioskop.bioskop.repository.BioskopRepository;
@@ -39,7 +40,18 @@ public class JadwalController {
     }
 
     @GetMapping("/film/{idFilm}/bioskop/{idBioskop}")
-    public List<Jadwal> getJadwalByFilmAndBioskop(@PathVariable String idFilm, @PathVariable String idBioskop) {
-        return jadwalRepository.findByFilm_IdFilmAndBioskop_IdBioskop(idFilm, idBioskop);
+    public List<JadwalSummaryDTO> getJadwalByFilmAndBioskop(
+            @PathVariable String idFilm,
+            @PathVariable String idBioskop) {
+
+        return jadwalRepository.findByFilm_IdFilmAndBioskop_IdBioskop(idFilm, idBioskop)
+            .stream()
+            .map(jadwal -> new JadwalSummaryDTO(
+                jadwal.getIdJadwal(),
+                jadwal.getHarga(),
+                jadwal.getTotalKursi(),
+                jadwal.getSisaKursi(),
+                jadwal.getWaktu()))
+            .collect(Collectors.toList());
     }
 }
