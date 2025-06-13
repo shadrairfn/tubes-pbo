@@ -1,24 +1,24 @@
 package com.bioskop.bioskop.dto;
 
-import java.util.Date;
 import java.util.List;
 
-
 public class TiketResponseDTO {
-    private String idTransaksi;
-    private String kodeTiket;
-    private String namaFilm;
-    private String namaBioskop;
-    private String jamTayang;
+
     private List<Integer> daftarKursi;
+    private String idTransaksi;
+    private String jamTayang;
+    private String kodeTiket;
+    private String namaBioskop;
+    private String namaFilm;
 
-    // constructor, getter, setter
-
-    public TiketResponseDTO() {
-        // kosong, dibutuhkan untuk serialisasi/deserialisasi
-    }
-
-    public TiketResponseDTO(List<Integer> daftarKursi, String idTransaksi, String jamTayang, String kodeTiket, String namaBioskop, String namaFilm) {
+    public TiketResponseDTO(
+        List<Integer> daftarKursi,
+        String idTransaksi,
+        String jamTayang,
+        String kodeTiket,
+        String namaBioskop,
+        String namaFilm
+    ) {
         this.daftarKursi = daftarKursi;
         this.idTransaksi = idTransaksi;
         this.jamTayang = jamTayang;
@@ -27,6 +27,14 @@ public class TiketResponseDTO {
         this.namaFilm = namaFilm;
     }
 
+    // Getter & Setter
+    public List<Integer> getDaftarKursi() {
+        return daftarKursi;
+    }
+
+    public void setDaftarKursi(List<Integer> daftarKursi) {
+        this.daftarKursi = daftarKursi;
+    }
 
     public String getIdTransaksi() {
         return idTransaksi;
@@ -34,30 +42,6 @@ public class TiketResponseDTO {
 
     public void setIdTransaksi(String idTransaksi) {
         this.idTransaksi = idTransaksi;
-    }
-
-    public String getKodeTiket() {
-        return kodeTiket;
-    }
-
-    public void setKodeTiket(String kodeTiket) {
-        this.kodeTiket = kodeTiket;
-    }
-
-    public String getNamaFilm() {
-        return namaFilm;
-    }
-
-    public void setNamaFilm(String namaFilm) {
-        this.namaFilm = namaFilm;
-    }
-
-    public String getNamaBioskop() {
-        return namaBioskop;
-    }
-
-    public void setNamaBioskop(String namaBioskop) {
-        this.namaBioskop = namaBioskop;
     }
 
     public String getJamTayang() {
@@ -68,13 +52,27 @@ public class TiketResponseDTO {
         this.jamTayang = jamTayang;
     }
 
-    public List<Integer> getDaftarKursi() {
-        return daftarKursi;
+    public String getKodeTiket() {
+        return kodeTiket;
     }
 
-    public void setDaftarKursi(List<Integer> daftarKursi) {
-        this.daftarKursi = daftarKursi;
+    public void setKodeTiket(String kodeTiket) {
+        this.kodeTiket = kodeTiket;
     }
 
-    
+    public String getNamaBioskop() {
+        return namaBioskop;
+    }
+
+    public void setNamaBioskop(String namaBioskop) {
+        this.namaBioskop = namaBioskop;
+    }
+
+    public String getNamaFilm() {
+        return namaFilm;
+    }
+
+    public void setNamaFilm(String namaFilm) {
+        this.namaFilm = namaFilm;
+    }
 }

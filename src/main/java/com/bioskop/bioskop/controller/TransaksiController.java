@@ -125,7 +125,19 @@ public class TransaksiController {
 
 
     @GetMapping
-    public List<Transaksi> getAll() {
-        return transaksiRepository.findAll();
+    public List<TiketResponseDTO> getAll() {
+        List<Transaksi> transaksiList = transaksiRepository.findAll();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+
+        return transaksiList.stream().map(transaksi -> new TiketResponseDTO(
+            transaksi.getKursi().stream().map(Kursi::getNomorKursi).toList(),
+            transaksi.getIdTransaksi(),
+            formatter.format(transaksi.getJadwal().getWaktu()),
+            transaksi.getKodeTiket(),
+            transaksi.getBioskop().getNamaBioskop(),
+            transaksi.getFilm().getJudul()
+        )).toList();
     }
+
+
 }
